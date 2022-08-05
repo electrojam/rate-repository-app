@@ -8,7 +8,7 @@ import AppBar from './AppBar.jsx';
 const Main = () => {
     return (
         <View style={{ flex: 1 }}>
-            <AppBar />
+            <AppBar />  
             <Routes>
                 <Route path='/' exact element={<RepositoryList />} />
                 <Route path='/signin' element={<Text>Working on it</Text>} />
