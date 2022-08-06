@@ -1,15 +1,23 @@
 import React from 'react'
-import { ViewPropTypes, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import Constants from  'expo-constants'
-import {Link} from 'react-router-native'
+import {Link, useLocation} from 'react-router-native'
 
 import StyledText from './StyledText'
 import theme from '../theme'
 
-const AppBarTab = ({active, children, to}) => {
+const AppBarTab = ({ children, to }) => {
+    const { pathname } = useLocation()
+    const active = pathname === to
+
+    const textStyles = [
+        styles.text,
+        active && styles.active
+    ]
+
     return (
-        <Link to={to}>
-            <StyledText fontWeight='bold' style={styles.text}>
+        <Link to={to} component={TouchableWithoutFeedback}>
+            <StyledText fontWeight='bold' style={textStyles}>
                 {children}
             </StyledText>            
         </Link>
@@ -17,10 +25,12 @@ const AppBarTab = ({active, children, to}) => {
 }
 
 const AppBar = () => {
-  return (
+    return (
     <View style={styles.container}>
-        <AppBarTab active to='/'>Repositories</AppBarTab>
-        <AppBarTab active to='/sigin'>Sign In</AppBarTab>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scroll}>
+            <AppBarTab to='/'>Repositories</AppBarTab>
+            <AppBarTab to='/sigin'>Sign In</AppBarTab>
+        </ScrollView>
     </View>
   )
 }
@@ -28,11 +38,21 @@ const AppBar = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: theme.appBar.primary,
-        paddingTop: Constants.statusBarHeight + 10,
-        paddingBottom: 10,
-        paddingLeft: 10
+        flexDirection: 'row',
+        paddingTop: Constants.statusBarHeight + 10
     },
     text: {
+        color: theme.appBar.textPrimary,
+        paddingHorizontal: 10
+    },
+    scroll: {
+        paddingBottom: 15
+    },
+    text: {
+        color: theme.appBar.textSecondary,
+        paddingHorizontal: 10
+    },
+    active: {
         color: theme.appBar.textPrimary
     }
 })
