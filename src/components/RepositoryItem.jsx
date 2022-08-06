@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet, Image, Platform } from "react-native"
 import theme from "../theme"
 
 import RepositoryStats from "./RepositoryStats"
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         padding: 4,
         color: theme.colors.white,
         backgroundColor: theme.colors.primary,
+            
         alignSelf: 'flex-start',
         marginVertical: 4,
         borderRadius: 4,
