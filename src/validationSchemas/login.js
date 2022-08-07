@@ -5,7 +5,7 @@ export const loginValidationSchema = yup.object().shape({
     .string()
     .email('Escribe un email válido')
     .required('Email is required'),
-  password: yup
+  password: yup 
     .string()
     .min(5, 'Too short!')
     .max(20, 'Too long!')
